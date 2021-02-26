@@ -25,15 +25,15 @@ const initialDisabled = false;
 const App = () => {
 
   const [order, setOrder] = useState([])
-  const [formValues, setFormValues] = useState()
-  const [formErrors, setFormErrors] = useState()
-  const [disabled, setDisabled] = useState()
+  const [formValues, setFormValues] = useState(initialFormValues)
+  const [formErrors, setFormErrors] = useState(initialFormErrors)
+  const [disabled, setDisabled] = useState(initialDisabled)
 
   const getOrder = () =>{
     axios
       .get('https://reqres.in/')
       .then(res =>{
-        console.log(res.data)
+        setOrder(res.data)
       })
       .catch(err =>{
         console.log(err)
@@ -44,7 +44,7 @@ const App = () => {
     axios
       .post('https://reqres.in/', newOrder)
       .then(res =>{
-        console.log(setOrder([res.data, ...order]))
+        setOrder([res.data, ...order])
       })
       .catch(err => {
         console.log(err)
@@ -88,11 +88,11 @@ const App = () => {
     <>
       <div className = "app-header">
       <h1>Lambda Eats</h1>
-      <a href= 'http://localhost:3000/pizza'>Order Pizza</a>
+      
       <Switch>
         <Route path = '/pizza'>
           <Form
-          key = {uuid}
+          key = {uuid()}
           values={formValues}
           submit={formSubmit}
           change={inputChange}
@@ -100,7 +100,9 @@ const App = () => {
           errors={formErrors} 
           />
         </Route>
-        <Route path = '/'></Route>
+        <Route path = '/'>
+          <a href= 'http://localhost:3000/pizza'>Order Pizza</a>
+        </Route>
       </Switch>
       </div>
     </>
