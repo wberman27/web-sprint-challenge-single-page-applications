@@ -92,6 +92,7 @@ const Form = (props) => {
   
           <div className='errors'>
             <div>{formErrors.name}</div>
+            <div>{formErrors.size}</div>
           </div>
         </div>
   
