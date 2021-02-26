@@ -108,6 +108,7 @@ a{
 .checkboxes{
   display:flex;
   flex-flow:column;
+  width:20%;
 }
 input{
  margin:1%;
