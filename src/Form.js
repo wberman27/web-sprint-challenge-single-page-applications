@@ -58,33 +58,33 @@ const Form = (props) => {
           <label>Pepperoni
             <input 
               type='checkbox'
-              name='toppings'
+              name='pepperoni'
               onChange={onChange}
-              checked={values.toppings} 
+              checked={values.pepperoni} 
             />
           </label>
           <label>Mushrooms
             <input 
               type='checkbox'
-              name='toppings'
+              name='mushrooms'
               onChange={onChange}
-              checked={values.toppings} 
+              checked={values.mushrooms} 
             />
           </label>
           <label>Jalapeño
             <input 
               type='checkbox'
-              name='toppings'
+              name='jalapeño'
               onChange={onChange}
-              checked={values.toppings} 
+              checked={values.jalapeño} 
             />
           </label>
           <label>Pineapple
             <input 
               type='checkbox'
-              name='toppings'
+              name='pineapple'
               onChange={onChange}
-              checked={values.toppings} 
+              checked={values.pineapple} 
             />
           </label>
   
@@ -99,7 +99,7 @@ const Form = (props) => {
             />
           </label>
 
-        <button id = 'submitButton' disabled = {disabled}>Submit Order</button>
+        <button id = 'submitButton' disabled = {disabled} href='/pizza/confirm'>Submit Order</button>
       
       </form>
     )

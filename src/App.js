@@ -90,6 +90,7 @@ const App = () => {
       <h1>Lambda Eats</h1>
       
       <Switch>
+        <Route path = '/pizza/confirm'><h2>Congratulations! Your pizza is on its way!</h2></Route>
         <Route path = '/pizza'>
           <Form
           key = {uuid()}
