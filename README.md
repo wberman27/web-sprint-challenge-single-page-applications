@@ -40,7 +40,7 @@ Form validation is a way to check whether the user has input to correct items in
 
 1. In 1-2 sentences, define end to end testing.
 
-End-to-end testing is comprehensive testing of the entire app. It test the web structure as well as form values and function execution.
+End-to-end testing is automated and comprehensive testing of the entire app. It test the web structure as well as form values and function execution.
 
 
 ## Instructions
