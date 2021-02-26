@@ -1,29 +1,88 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import './App.css';
 import { v4 as uuid } from 'uuid'
-import {Route} from 'react-router-dom'
-import Confirm from './Confirm'
+import Schema from './Schema'
+import axios from './myapi'
+import './myapi'
+import * as yup from 'yup'
 
 const Form = (props) => {
 
-    const {
-      values,
-      submit,
-      change,
-      disabled,
-      errors,
-      order
-    } = props
+    const {initialDisabled, initialFormErrors, initialFormValues} = props
+
+    const [order, setOrder] = useState([])
+    const [formValues, setFormValues] = useState(initialFormValues)
+    const [formErrors, setFormErrors] = useState(initialFormErrors)
+    const [disabled, setDisabled] = useState(initialDisabled)
+  
+    const getOrder = () =>{ //get order and set from api
+      axios
+        .get('https://pizzaplace.com/api/Orders')
+        .then(res =>{
+          setOrder(res.data)
+        })
+        .catch(err =>{
+          console.log(err)
+        })
+    }
+  
+    const postNewOrder = newOrder => { //post order to api
+      axios
+        .post('https://pizzaplace.com/api/Orders', newOrder)
+        .then(res =>{
+          setOrder([res.data, ...order])
+        })
+        .catch(err => {
+          console.log(err)
+        })
+        setFormValues(initialFormValues) //reset form values
+    }
+  
+    const inputChange = (name,value) =>{
+      yup.reach(Schema, name)
+        .validate(value)
+        .then(() =>{
+          setFormErrors({...formErrors, [name]: ''})
+        })
+        .catch(err =>{
+          setFormErrors({...formErrors, [name]: err.errors[0]})
+        })
+        setFormValues({
+          ...formValues, [name]: value
+        })
+    }
+  
+    const formSubmit = () => { //function for submitting form
+      const newOrder = {
+        name: formValues.name.trim(),
+        size: formValues.size,
+        pepperoni: formValues.pepperoni ? 'Pepperoni' : '',
+        mushrooms: formValues.mushrooms ? 'Mushrooms' : '',
+        jalapeño: formValues.jalapeño ? 'Jalapeño' : '',
+        pineapple: formValues.pineapple ? 'Pineapple' : '',
+        spec: formValues.spec.trim() 
+      }
+      postNewOrder(newOrder) //post new order 
+    }
+  
+    useEffect(() => { //get order invoked on page load
+      getOrder()
+    }, [])
+  
+    useEffect(() => { //whenever form values change, check schema validation
+      Schema.isValid(formValues).then(valid => setDisabled(!valid))
+    }, [formValues])
+  
 
     const onSubmit = evt => { //prevent submit's default refresh
         evt.preventDefault()
-        submit()
+        formSubmit()
       }
     
       const onChange = evt => { 
         const { name, value, type, checked } = evt.target
         const valueToUse = type === 'checkbox' ? checked : value // use valueToUse with checkbox, otherwise use value
-        change(name, valueToUse)
+        inputChange(name, valueToUse)
       }
 
     return (
@@ -32,7 +91,7 @@ const Form = (props) => {
         <div className='submit'>
   
           <div className='errors'>
-            <div>{errors.name}</div>
+            <div>{formErrors.name}</div>
           </div>
         </div>
   
@@ -41,7 +100,7 @@ const Form = (props) => {
   
           <label>Name (required)
             <input
-              value={values.name}
+              value={formValues.name}
               onChange={onChange}
               name='name'
               type='text'
@@ -51,7 +110,7 @@ const Form = (props) => {
           </label>
   
           <label>Choice of Size
-                <select value = {values.size} name = 'size' onChange = {onChange}>
+                <select value = {formValues.size} name = 'size' onChange = {onChange}>
 
                     <option value = ''>--Select Size--</option>
                     <option value = 'SMALL'>Small</option>
@@ -70,7 +129,7 @@ const Form = (props) => {
               type='checkbox'
               name='pepperoni'
               onChange={onChange}
-              checked={values.pepperoni} 
+              checked={formValues.pepperoni} 
             />
           </label>
           <label>Mushrooms
@@ -78,7 +137,7 @@ const Form = (props) => {
               type='checkbox'
               name='mushrooms'
               onChange={onChange}
-              checked={values.mushrooms} 
+              checked={formValues.mushrooms} 
             />
           </label>
           <label>Jalapeño
@@ -86,7 +145,7 @@ const Form = (props) => {
               type='checkbox'
               name='jalapeño'
               onChange={onChange}
-              checked={values.jalapeño} 
+              checked={formValues.jalapeño} 
             />
           </label>
           <label>Pineapple
@@ -94,7 +153,7 @@ const Form = (props) => {
               type='checkbox'
               name='pineapple'
               onChange={onChange}
-              checked={values.pineapple} 
+              checked={formValues.pineapple} 
             />
           </label>
   
@@ -102,7 +161,7 @@ const Form = (props) => {
 
         <label>Special Instructions
             <input
-              value={values.spec}
+              value={formValues.spec}
               onChange={onChange}
               name='spec'
               type='text'
