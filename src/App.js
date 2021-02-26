@@ -6,7 +6,7 @@ import Confirm from './Confirm'
 import axios from './myapi'
 import { v4 as uuid } from 'uuid'
 import * as yup from 'yup'
-import {Route, Switch, useParams} from 'react-router-dom'
+import {Route, Switch} from 'react-router-dom'
 import './myapi'
 
 const initialFormValues = {
@@ -41,7 +41,6 @@ const App = () => {
     axios
       .get('https://pizzaplace.com/api/Orders')
       .then(res =>{
-        console.log(res.data)
         setOrder(res.data)
       })
       .catch(err =>{
@@ -54,11 +53,11 @@ const App = () => {
       .post('https://pizzaplace.com/api/Orders', newOrder)
       .then(res =>{
         setOrder([res.data, ...order])
-        console.log(setOrder([res.data, ...order]))
       })
       .catch(err => {
         console.log(err)
       })
+      setFormValues(initialFormValues)
   }
 
   const inputChange = (name,value) =>{
@@ -100,11 +99,12 @@ const App = () => {
   return (
     <>
       <div className = "app-header">
-      <h1>Lambda Eats</h1>
-      
+        <div className = 'header-nav'>
+          <h1>Lambda Eats</h1><a href='/'>Home</a><a href='/pizza'>Order</a>
+        </div>
       <Switch>
         <Route path = '/pizza/confirm'>
-          <Confirm key = {uuid()} order = {order}/>
+          <Confirm key = {uuid()} formSubmit = {formSubmit}/>
         </Route>
         <Route path = '/pizza'>
           <Form
@@ -120,6 +120,7 @@ const App = () => {
         <Route path = '/'>
           <div className = "home-container">
           <a href= 'http://localhost:3000/pizza'>Order Pizza</a>
+          <div className = 'home-img'><img src='https://www.qsrmagazine.com/sites/default/files/styles/story_page/public/phut_0.jpg?itok=h30EAnkk'/></div>
           </div>
         </Route>
       </Switch>

@@ -3,7 +3,7 @@ import { v4 as uuid } from 'uuid' //uuid gives us unique key ids
 export const initialOrder = [ //this user will be on the page at start
     {
       id: uuid(),
-      name: 'I was first!',
+      name: 'Mr. Pizza Dude',
       size: 'LARGE',
       pepperoni: true,
       mushrooms: false,

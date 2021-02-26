@@ -1,6 +1,8 @@
 import React from 'react'
 import './App.css';
 import { v4 as uuid } from 'uuid'
+import {Route} from 'react-router-dom'
+import Confirm from './Confirm'
 
 const Form = (props) => {
 
@@ -107,7 +109,7 @@ const Form = (props) => {
             />
           </label>
 
-        <button id = 'submitButton' disabled = {disabled} href='/pizza/confirm'>Submit Order</button>
+        <button id = 'submitButton' disabled = {disabled}>Submit Order</button>
       
       </form>
     <div className = 'orders-container'>
@@ -136,6 +138,7 @@ const Form = (props) => {
                             </div>
                         
                         <p>Special Instructions: <span  id = 'spec'>{o.spec}</span></p>
+                        <a href = 'http://localhost:3000/pizza/confirm'>See Order Status</a>
 
                       </div>
                   </div>
@@ -146,5 +149,7 @@ const Form = (props) => {
       </div>  
     </>
     )
+    
 }
+
 export default Form

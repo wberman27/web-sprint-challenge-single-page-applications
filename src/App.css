@@ -1,10 +1,12 @@
 .App {
   text-align: center;
 }
-
+html{
+  background-color: burlywood;
+}
 h1{
+  position: absolute;
   text-align: center;
-  background-color: orangered;
 }
 
 .home-container{
@@ -23,6 +25,8 @@ h1{
 }
 .order-container{
   border:1px solid black;
+  margin: .5%;
+  padding: 0.5% 1% .5% 1%; 
 }
 p{
   font-weight: 900;
@@ -31,7 +35,8 @@ p{
 
 #goldname{
   font-weight: 900;
-  color: gold;
+  font-size:1.2rem;
+  color: orange;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
   
@@ -39,8 +44,6 @@ p{
 #spec{
   font-weight: 900;
   color: red;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: black;
 }
 .pepperoni{
   font-weight: 900;
@@ -72,7 +75,34 @@ p{
   justify-content: center;
   align-items: center;
 }
-
+a{
+  text-decoration: none;
+  color: black;
+  border: solid black;
+  background-color: crimson;
+  height:3%;
+  margin:2%;
+  padding:1%;
+  position: relative;
+}
+.header-nav{
+  display: flex;
+  flex-flow: row;
+  background-color: orangered;
+  justify-content: flex-end;
+  align-items: center;
+  border-bottom: 2px solid black;
+}
+.header-nav h1{
+  width:100%;
+}
+.home-container{
+  display: flex;
+  flex-flow:column;
+}
+#pizzaman{
+  width:50%;
+}
 .App-link {
   color: #61dafb;
 }
