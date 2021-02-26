@@ -26,6 +26,7 @@ it('Submit button works', () =>{ //checks to see if submit button works
         .select('Large')
     submitButton()
         .click()
+    cy.contains('William') //the page contains William after submit button
     
     
 })
