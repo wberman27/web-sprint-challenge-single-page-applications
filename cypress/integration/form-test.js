@@ -14,6 +14,7 @@ const pepperCheck = () => cy.get('input[name=pepperoni]')
 const mushCheck = () => cy.get('input[name=mushrooms]')
 const jalaCheck = () => cy.get('input[name=jalapeño]')
 const pineCheck = () => cy.get('input[name=pineapple]')
+const formValid = () => cy.get('div[class=errors]')
 
 it('Filling out inputs', () =>{ //check in cypress, if filling out inputs work correctly
     textInput()
@@ -34,7 +35,7 @@ it('Submit button works', () =>{ //checks to see if submit button works
     
     
 })
-it('Tests selection of multiple toppings', () =>{
+it('Tests selection of multiple toppings', () =>{ //check a topping and test that is should have 'on' value
     pepperCheck()
         .check()
         .should('have.value', 'on')
@@ -48,4 +49,31 @@ it('Tests selection of multiple toppings', () =>{
         .check()
         .should('have.value', 'on')
     
+})
+
+it('Checks error for empty name input', () =>{
+    textInput()
+        .type('William{selectall}{backspace}') //type in a name then delete it for error
+    formValid()
+        .children().should('have.text', 'Name is required.') // this error should be on page
+})
+
+it('Check error for no size selection', () =>{
+    sizeSelect()
+        .select('Medium')
+        .select('--Select Size--') //select size then deselect it for error msg
+    formValid()
+        .children().should('have.text', 'You must choose a size.') // this error should be on page
+})
+
+it('Checks for no errors on page start', () => {
+    formValid()
+        .children().should('have.text', '') //Error children should have empty txt
+})
+
+it('Checks error not enough characters name input', () =>{
+    textInput()
+        .type('B') //type in a name less than 2 characters
+    formValid()
+        .children().should('have.text', 'Name must be at least 2 characters.') // this error should be on page
 })
