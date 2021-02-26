@@ -8,7 +8,8 @@ const Schema = yup.object().shape({
         .min(3, 'Name must be at least 3 characters.'),
     //dropdown
     size: yup.string()
-        .required('Size is required.'),
+        .required(),
+        // .oneOf(['Small', 'Medium', 'Large'], 'You must choose a size.'),
     //input string
     spec: yup.string(), //not required
     // checkboxes
