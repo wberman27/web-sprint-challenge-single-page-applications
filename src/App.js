@@ -4,6 +4,8 @@ import Form from './Form';
 import Schema from './Schema'
 import axios from 'axios'
 import { v4 as uuid } from 'uuid'
+import * as yup from 'yup'
+import {Route, Switch, useParams} from 'react-router-dom'
 
 const initialFormValues = {
   name: '',
@@ -31,7 +33,7 @@ const App = () => {
     axios
       .get('https://reqres.in/')
       .then(res =>{
-        console.log(res)
+        console.log(res.data)
       })
       .catch(err =>{
         console.log(err)
@@ -49,15 +51,58 @@ const App = () => {
       })
   }
 
+  const inputChange = (name,value) =>{
+    yup.reach(Schema, name)
+      .validate(value)
+      .then(() =>{
+        setFormErrors({...formErrors, [name]: ''})
+      })
+      .catch(err =>{
+        setFormErrors({...formErrors, [name]: err.errors[0]})
+      })
+      setFormValues({
+        ...formValues, [name]: value
+      })
+  }
+
+  const formSubmit = () => {
+    const newOrder = {
+      name: formValues.name.trim(),
+      size: formValues.size,
+      toppings: formValues.toppings,
+      spec: formValues.spec.trim() 
+    }
+    postNewOrder(newOrder)
+  }
+
+  useEffect(() => {
+    getOrder()
+  }, [])
+
+  useEffect(() => {
+    Schema.isValid(formValues).then(valid => setDisabled(!valid))
+  }, [formValues])
 
 
   return (
     <>
       <div className = "app-header">
       <h1>Lambda Eats</h1>
-      <p>You can remove this code and create your own header</p>
+      <a href= 'http://localhost:3000/pizza'>Order Pizza</a>
+      <Switch>
+        <Route path = '/pizza'>
+          <Form
+          key = {uuid}
+          values={formValues}
+          submit={formSubmit}
+          change={inputChange}
+          disabled={disabled}
+          errors={formErrors} 
+          />
+        </Route>
+        <Route path = '/'></Route>
+      </Switch>
       </div>
-      <Form />
     </>
   );
 };
