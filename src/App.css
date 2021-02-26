@@ -21,6 +21,51 @@ h1{
   align-items: center;
   padding: 2%;
 }
+.order-container{
+  border:1px solid black;
+}
+p{
+  font-weight: 900;
+  color: black;
+}
+
+#goldname{
+  font-weight: 900;
+  color: gold;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+  
+}
+#spec{
+  font-weight: 900;
+  color: red;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+.pepperoni{
+  font-weight: 900;
+  color: crimson;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+.pineapple{
+  font-weight: 900;
+  color: yellow;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+.jalapeno{
+  font-weight: 900;
+  color: green;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
+.mushrooms{
+  font-weight: 900;
+  color: brown;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
+}
 
 .App-link {
   color: #61dafb;

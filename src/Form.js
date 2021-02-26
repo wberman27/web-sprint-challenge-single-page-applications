@@ -1,5 +1,6 @@
 import React from 'react'
 import './App.css';
+import { v4 as uuid } from 'uuid'
 
 const Form = (props) => {
 
@@ -8,7 +9,8 @@ const Form = (props) => {
       submit,
       change,
       disabled,
-      errors
+      errors,
+      order
     } = props
 
     const onSubmit = evt => { //prevent submit's default refresh
@@ -23,6 +25,7 @@ const Form = (props) => {
       }
 
     return (
+    <>
       <form className='form-container' onSubmit={onSubmit}>
         <div className='submit'>
   
@@ -107,6 +110,40 @@ const Form = (props) => {
         <button id = 'submitButton' disabled = {disabled} href='/pizza/confirm'>Submit Order</button>
       
       </form>
+
+      <h3>Current Orders at Lambda Eats</h3>
+      
+      {
+          order.map(o =>{
+              return (
+                  <>
+                  <div className = 'order-container' key = {uuid()}>
+                      <div className = 'order'>
+                        <p>Name: <span id = 'goldname'>{o.name}</span></p>
+                        <p>Size: {o.size}</p>
+                        <p>Toppings: </p>
+                            <div className = 'pepperoni'>
+                            {o.pepperoni ? 'Pepperoni' : ''} 
+                            </div>
+                            <div className = 'mushrooms'>
+                            {o.mushrooms ? 'Mushrooms' : ''}
+                            </div>
+                            <div className = 'jalapeno'>
+                            {o.jalapeño ? 'Jalapeño' : ''}
+                            </div>
+                            <div className = 'pineapple'>
+                            {o.pineapple ? 'Pineapple' : ''}
+                            </div>
+                        
+                        <p>Special Instructions: <span  id = 'spec'>{o.spec}</span></p>
+
+                      </div>
+                  </div>
+                  </>
+              )
+          })
+      }  
+    </>
     )
 }
 export default Form

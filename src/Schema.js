@@ -7,10 +7,10 @@ const Schema = yup.object().shape({
         .min(3, 'Name must be at least 3 characters.'),
     size: yup.string(),
     spec: yup.string(), //not required
-    jalapeño: yup.string(),
-    pepperoni: yup.string(),
-    mushrooms: yup.string(),
-    pineapple: yup.string()
+    jalapeño: yup.boolean(),
+    pepperoni: yup.boolean(),
+    mushrooms: yup.boolean(),
+    pineapple: yup.boolean()
 })
 
 export default Schema

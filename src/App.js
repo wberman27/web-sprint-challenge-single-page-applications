@@ -11,13 +11,19 @@ import './myapi'
 const initialFormValues = {
   name: '',
   size: '',
-  toppings: '',
+  pepperoni: false,
+  mushrooms: false,
+  jalapeño: false,
+  pineapple: false,
   spec: ''
 }
 const initialFormErrors = {
   name: '',
   size: '',
-  toppings: '',
+  pepperoni: false,
+  mushrooms: false,
+  jalapeño: false,
+  pineapple: false,
   spec: ''
 }
 
@@ -34,6 +40,7 @@ const App = () => {
     axios
       .get('https://pizzaplace.com/api/Orders')
       .then(res =>{
+        console.log(res.data)
         setOrder(res.data)
       })
       .catch(err =>{
@@ -71,10 +78,10 @@ const App = () => {
     const newOrder = {
       name: formValues.name.trim(),
       size: formValues.size,
-      pepperoni: formValues.pepperoni,
-      mushrooms: formValues.mushrooms,
-      jalapeño: formValues.jalapeño,
-      pineapple: formValues.pineapple,
+      pepperoni: formValues.pepperoni ? 'Pepperoni' : '',
+      mushrooms: formValues.mushrooms ? 'Mushrooms' : '',
+      jalapeño: formValues.jalapeño ? 'Jalapeño' : '',
+      pineapple: formValues.pineapple ? 'Pineapple' : '',
       spec: formValues.spec.trim() 
     }
     postNewOrder(newOrder)
@@ -107,6 +114,7 @@ const App = () => {
           change={inputChange}
           disabled={disabled}
           errors={formErrors} 
+          order={order}
           />
         </Route>
         <Route path = '/'>
