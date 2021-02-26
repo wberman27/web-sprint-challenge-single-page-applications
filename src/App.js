@@ -9,7 +9,7 @@ import * as yup from 'yup'
 import {Route, Switch} from 'react-router-dom'
 import './myapi'
 
-const initialFormValues = {
+const initialFormValues = { //intial form values
   name: '',
   size: '',
   pepperoni: false,
@@ -18,7 +18,7 @@ const initialFormValues = {
   pineapple: false,
   spec: ''
 }
-const initialFormErrors = {
+const initialFormErrors = { //intial form errors
   name: '',
   size: '',
   pepperoni: false,
@@ -28,7 +28,7 @@ const initialFormErrors = {
   spec: ''
 }
 
-const initialDisabled = false;
+const initialDisabled = false; //button disabled intially
 
 const App = () => {
 
@@ -37,7 +37,7 @@ const App = () => {
   const [formErrors, setFormErrors] = useState(initialFormErrors)
   const [disabled, setDisabled] = useState(initialDisabled)
 
-  const getOrder = () =>{
+  const getOrder = () =>{ //get order and set from api
     axios
       .get('https://pizzaplace.com/api/Orders')
       .then(res =>{
@@ -48,7 +48,7 @@ const App = () => {
       })
   }
 
-  const postNewOrder = newOrder => {
+  const postNewOrder = newOrder => { //post order to api
     axios
       .post('https://pizzaplace.com/api/Orders', newOrder)
       .then(res =>{
@@ -57,7 +57,7 @@ const App = () => {
       .catch(err => {
         console.log(err)
       })
-      setFormValues(initialFormValues)
+      setFormValues(initialFormValues) //reset form values
   }
 
   const inputChange = (name,value) =>{
@@ -74,7 +74,7 @@ const App = () => {
       })
   }
 
-  const formSubmit = () => {
+  const formSubmit = () => { //function for submitting form
     const newOrder = {
       name: formValues.name.trim(),
       size: formValues.size,
@@ -84,14 +84,14 @@ const App = () => {
       pineapple: formValues.pineapple ? 'Pineapple' : '',
       spec: formValues.spec.trim() 
     }
-    postNewOrder(newOrder)
+    postNewOrder(newOrder) //post new order 
   }
 
-  useEffect(() => {
+  useEffect(() => { //get order invoked on page load
     getOrder()
   }, [])
 
-  useEffect(() => {
+  useEffect(() => { //whenever form values change, check schema validation
     Schema.isValid(formValues).then(valid => setDisabled(!valid))
   }, [formValues])
 
