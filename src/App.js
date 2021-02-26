@@ -2,10 +2,11 @@ import React, {useState, useEffect} from 'react'
 import './App.css';
 import Form from './Form';
 import Schema from './Schema'
-import axios from 'axios'
+import axios from './myapi'
 import { v4 as uuid } from 'uuid'
 import * as yup from 'yup'
 import {Route, Switch, useParams} from 'react-router-dom'
+import './myapi'
 
 const initialFormValues = {
   name: '',
@@ -31,7 +32,7 @@ const App = () => {
 
   const getOrder = () =>{
     axios
-      .get('https://reqres.in/')
+      .get('https://pizzaplace.com/api/Orders')
       .then(res =>{
         setOrder(res.data)
       })
@@ -42,9 +43,10 @@ const App = () => {
 
   const postNewOrder = newOrder => {
     axios
-      .post('https://reqres.in/', newOrder)
+      .post('https://pizzaplace.com/api/Orders', newOrder)
       .then(res =>{
         setOrder([res.data, ...order])
+        console.log(setOrder([res.data, ...order]))
       })
       .catch(err => {
         console.log(err)
@@ -69,7 +71,10 @@ const App = () => {
     const newOrder = {
       name: formValues.name.trim(),
       size: formValues.size,
-      toppings: formValues.toppings,
+      pepperoni: formValues.pepperoni,
+      mushrooms: formValues.mushrooms,
+      jalapeño: formValues.jalapeño,
+      pineapple: formValues.pineapple,
       spec: formValues.spec.trim() 
     }
     postNewOrder(newOrder)
@@ -90,7 +95,10 @@ const App = () => {
       <h1>Lambda Eats</h1>
       
       <Switch>
-        <Route path = '/pizza/confirm'><h2>Congratulations! Your pizza is on its way!</h2></Route>
+        <Route path = '/pizza/confirm'>
+          <h2>Congratulations! Your pizza is on its way!</h2>
+          <div className = 'pizza-img'><img src='./Assets/Pizza.jpg' alt="Pizza"/></div>
+        </Route>
         <Route path = '/pizza'>
           <Form
           key = {uuid()}
@@ -102,7 +110,9 @@ const App = () => {
           />
         </Route>
         <Route path = '/'>
+          <div className = "home-container">
           <a href= 'http://localhost:3000/pizza'>Order Pizza</a>
+          </div>
         </Route>
       </Switch>
       </div>

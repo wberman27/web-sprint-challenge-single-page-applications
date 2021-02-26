@@ -1,4 +1,5 @@
 import React from 'react'
+import './App.css';
 
 const Form = (props) => {
 
@@ -22,7 +23,7 @@ const Form = (props) => {
       }
 
     return (
-      <form className='form container' onSubmit={onSubmit}>
+      <form className='form-container' onSubmit={onSubmit}>
         <div className='submit'>
   
           <div className='errors'>
@@ -39,22 +40,26 @@ const Form = (props) => {
               onChange={onChange}
               name='name'
               type='text'
+              placeholder='First Name Last Name'
+              maxLength = '40'
             />
           </label>
   
           <label>Choice of Size
-            <input
-              value={values.size}
-              onChange={onChange}
-              name='size'
-              type='dropdown'
-            />
-          </label>  
+                <select value = {values.size} name = 'size' onChange = {onChange}>
+
+                    <option value = ''>--Select Size--</option>
+                    <option value = 'SMALL'>Small</option>
+                    <option value = 'MEDIUM'>Medium</option>
+                    <option value = 'LARGE'>Large</option>
+
+                </select>
+            </label> 
 
         </div>
   
         <div className='checkboxes'>
-          <h4>Add Toppings</h4>
+          <h5>Add Toppings</h5>
           <label>Pepperoni
             <input 
               type='checkbox'
