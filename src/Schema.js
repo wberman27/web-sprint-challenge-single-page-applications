@@ -11,6 +11,7 @@ const Schema = yup.object().shape({
         .oneOf(['SMALL', 'MEDIUM', 'LARGE'], 'You must choose a size.'),
     //input string
     spec: yup.string(), //special instructions not required
+    
     // checkboxes, not required
     jalapeño: yup.boolean(),
     pepperoni: yup.boolean(),

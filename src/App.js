@@ -1,11 +1,8 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import './App.css';
 import Form from './Form';
-import Schema from './Schema'
 import Confirm from './Confirm'
-import axios from './myapi'
 import { v4 as uuid } from 'uuid'
-import * as yup from 'yup'
 import {Route, Switch} from 'react-router-dom'
 import './myapi'
 
