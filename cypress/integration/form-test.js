@@ -1,5 +1,5 @@
 beforeEach(() =>{
-    cy.visit('http://localhost:3000/pizza')
+    cy.visit('http://localhost:3000/pizza/')
 })
 
 it('Sanity check', () =>{
