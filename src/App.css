@@ -66,6 +66,12 @@ p{
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: black;
 }
+.orders-container{
+  display:flex;
+  flex-flow:column;
+  justify-content: center;
+  align-items: center;
+}
 
 .App-link {
   color: #61dafb;

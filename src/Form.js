@@ -110,7 +110,7 @@ const Form = (props) => {
         <button id = 'submitButton' disabled = {disabled} href='/pizza/confirm'>Submit Order</button>
       
       </form>
-
+    <div className = 'orders-container'>
       <h3>Current Orders at Lambda Eats</h3>
       
       {
@@ -142,7 +142,8 @@ const Form = (props) => {
                   </>
               )
           })
-      }  
+      }
+      </div>  
     </>
     )
 }

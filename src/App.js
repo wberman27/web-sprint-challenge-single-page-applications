@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import './App.css';
 import Form from './Form';
 import Schema from './Schema'
+import Confirm from './Confirm'
 import axios from './myapi'
 import { v4 as uuid } from 'uuid'
 import * as yup from 'yup'
@@ -103,8 +104,7 @@ const App = () => {
       
       <Switch>
         <Route path = '/pizza/confirm'>
-          <h2>Congratulations! Your pizza is on its way!</h2>
-          <div className = 'pizza-img'><img src='./Assets/Pizza.jpg' alt="Pizza"/></div>
+          <Confirm key = {uuid()} order = {order}/>
         </Route>
         <Route path = '/pizza'>
           <Form
