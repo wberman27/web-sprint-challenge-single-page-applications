@@ -1,12 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import './App.css';
-import { v4 as uuid } from 'uuid'
-import axios from './myapi'
 
-const Confirm = (props) =>{
-    const {formSubmit} = props
+
+const Confirm = () =>{
     
-
     return (
         <>
          <h2>Congratulations! Your pizza is on its way!</h2>

@@ -69,7 +69,7 @@ const Form = (props) => {
       getOrder()
     }, [])
   
-    useEffect(() => { //whenever form values change, check schema validation
+    useEffect(() => { //whenever form values change, check schema validation, then disable/enable button accordingly
       Schema.isValid(formValues).then(valid => setDisabled(!valid))
     }, [formValues])
   
@@ -98,7 +98,7 @@ const Form = (props) => {
         <div className='inputs'>
           <h3>Create Your Pizza</h3>
   
-          <label>Name (required)
+          <label>Name
             <input
               value={formValues.name}
               onChange={onChange}

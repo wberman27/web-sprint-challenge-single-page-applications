@@ -103,6 +103,18 @@ a{
 #pizzaman{
   width:50%;
 }
+
+.checkboxes{
+  display:flex;
+  flex-flow:column;
+}
+input{
+ margin:1%;
+}
+.inputs{
+  display:flex;
+  flex-flow:column;
+}
 .App-link {
   color: #61dafb;
 }
